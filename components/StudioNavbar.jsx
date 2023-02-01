@@ -10,7 +10,7 @@ function StudioNavbar(props) {
           Go To Website
         </Link>
       </div>
-      <>{props.renderDefault(props)}</>
+      <div>{props.renderDefault(props)}</div>
     </div>
   );
 }
