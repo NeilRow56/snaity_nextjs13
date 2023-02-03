@@ -1,6 +1,6 @@
 function Banner() {
   return (
-    <div className="lg:space-5 mb-10 flex flex-col justify-between px-10 py-5 font-bold lg:flex-row">
+    <div className="lg:space-5 mb-10 flex flex-col justify-between px-10 py-2 font-bold lg:flex-row">
       <div>
         <h1 className="text-7xl">Sonny&apos;s Daily Blog</h1>
         <h2 className="mt-5 md:mt-3">

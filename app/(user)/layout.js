@@ -5,7 +5,7 @@ import "../globals.css";
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
+      <body className="mx-auto max-w-7xl">
         <Header />
         <Banner />
         {children}
