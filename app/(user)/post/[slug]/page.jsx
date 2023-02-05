@@ -5,6 +5,23 @@ import { client } from "../../../../lib/sanity.client";
 import urlFor from "../../../../lib/urlFor";
 import { RichTextComponents } from "../../../../components/RichTextComponents";
 
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  // Execute query
+  const query = groq`*[_type=='post']
+  {
+    slug
+  }
+  `;
+  const slugs = await client.fetch(query);
+  const slugRoutes = slugs.map((slug) => slug.slug.current);
+
+  return slugRoutes.map((slug) => ({
+    slug,
+  }));
+}
+
 async function Post({ params: { slug } }) {
   const query = groq`
        *[_type=='post' && slug.current == $slug][0]
@@ -32,17 +49,13 @@ async function Post({ params: { slug } }) {
             <div className="flex flex-col justify-between gap-y-5 md:flex-row">
               <div>
                 <h1 className="text-4xl font-extrabold">{post.title}</h1>
-                {/* <p>
-                  {
-                    new Date(
-                      post._createdAt.toLocaleString("en-GB", {
-                        day: "numeric",
-                        month: "long",
-                        year: "numeric",
-                      })
-                    )
-                  }
-                </p> */}
+                <p>
+                  {new Date(post._createdAt).toLocaleDateString("en-GB", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}
+                </p>
               </div>
               <div className="flex items-center space-x-3 ">
                 <Image
